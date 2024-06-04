@@ -61,6 +61,16 @@ class CartManager{
         await this.writeCarts(cartsConcat)
         return "Producto Agregado Correctamente"
     }
+    deleteCarts = async (id) => {
+        let carts = await this.readCarts();
+        let existCarts = carts.some(cart => cart.id === id)
+        if (existCarts) {
+            let filterCarts = carts.filter(cart => cart.id != id)
+            await this.writeCarts(filterCarts)
+            return "Carrito eliminado correctamente"
+        }
+        return "El Carrito que desea eliminar no se encuentra"
+    }
 }
 
 export default CartManager
